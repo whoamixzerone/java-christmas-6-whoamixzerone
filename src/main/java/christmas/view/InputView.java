@@ -5,6 +5,8 @@ import christmas.util.InputNumber;
 import christmas.util.InputString;
 import christmas.util.InputValidator;
 
+import java.util.Map;
+
 public class InputView {
     public int readDate() {
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
@@ -29,7 +31,10 @@ public class InputView {
             String input = Console.readLine();
 
             try {
-                String[] menuGroup = InputString.menuGroupSplit(input);
+                String[] menuGroup = InputString.menuGroupSplit(input, ",");
+                InputValidator.validMenuForm(menuGroup);
+
+                Map<String, Integer> menus = InputString.menuSplit(menuGroup);
 
                 return new String[0];
             } catch (IllegalArgumentException e) {

@@ -1,11 +1,20 @@
 package christmas.util;
 
-import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InputString {
-    private static final Pattern MENU_REGEX = Pattern.compile("([ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)-(\\d*)");
+    public static String[] menuGroupSplit(String input, String delimiter) {
+        return input.split(delimiter);
+    }
 
-    public static String[] menuGroupSplit(String input) {
-        return input.split(",");
+    public static Map<String, Integer> menuSplit(String[] menuGroup) {
+        Map<String, Integer> menus = new HashMap<>();
+
+        for (String menu : menuGroup) {
+            String[] food = menuGroupSplit(menu, "-");
+            menus.put(food[0], InputNumber.toInt(food[1]));
+        }
+        return menus;
     }
 }
