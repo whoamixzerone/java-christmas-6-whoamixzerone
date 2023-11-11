@@ -11,5 +11,6 @@ public class Promotion {
 
     public void execute() {
         int reservationDay = inputView.readDate();
+        String[] menus = inputView.readOrder();
     }
 }

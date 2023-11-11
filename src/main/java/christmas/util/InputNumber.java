@@ -1,6 +1,6 @@
 package christmas.util;
 
-public class Number {
+public class InputNumber {
     public static int toInt(String input) {
         return Integer.parseInt(input);
     }

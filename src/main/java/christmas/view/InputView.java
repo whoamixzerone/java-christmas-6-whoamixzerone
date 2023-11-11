@@ -1,8 +1,9 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.util.InputNumber;
+import christmas.util.InputString;
 import christmas.util.InputValidator;
-import christmas.util.Number;
 
 public class InputView {
     public int readDate() {
@@ -15,7 +16,22 @@ public class InputView {
             try {
                 InputValidator.validNumber(input);
 
-                return Number.toInt(input);
+                return InputNumber.toInt(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (true);
+    }
+
+    public String[] readOrder() {
+        do {
+            System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
+            String input = Console.readLine();
+
+            try {
+                String[] menuGroup = InputString.menuGroupSplit(input);
+
+                return new String[0];
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
