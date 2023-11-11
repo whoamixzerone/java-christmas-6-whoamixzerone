@@ -26,7 +26,7 @@ public enum MenuType {
         return foodName;
     }
 
-    MenuType(long amount) {
-        this.amount = amount;
+    public long getAmount() {
+        return amount;
     }
 }
