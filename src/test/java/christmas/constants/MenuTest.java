@@ -11,7 +11,7 @@ class MenuTest {
     @ParameterizedTest
     @ValueSource(strings = {"알리오올리오파스타", "하이볼", "딸기케이크"})
     void isNotMenuType(String menu) {
-        boolean result = Menu.isNotMenu(menu);
+        boolean result = Menu.isNotInMenu(menu);
 
         assertThat(result).isTrue();
     }

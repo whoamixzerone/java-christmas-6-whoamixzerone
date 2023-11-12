@@ -24,7 +24,7 @@ public enum Menu {
         this.amount = amount;
     }
 
-    public static boolean isNotMenu(String food) {
+    public static boolean isNotInMenu(String food) {
         return !Arrays.stream(Menu.values())
                 .anyMatch(menu -> food.equals(menu.getFood()));
     }

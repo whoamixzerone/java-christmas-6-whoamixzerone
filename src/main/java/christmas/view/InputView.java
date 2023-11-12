@@ -36,6 +36,7 @@ public class InputView {
 
                 Map<String, Integer> orders = InputString.orderSplit(orderGroup);
                 InputValidator.validOrder(orders);
+                InputValidator.validOrderDuplicate(orders, orderGroup);
 
                 return new String[0];
             } catch (IllegalArgumentException e) {

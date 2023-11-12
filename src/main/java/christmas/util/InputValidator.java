@@ -69,7 +69,7 @@ public class InputValidator {
 
     private static void validMenu(Map<String, Integer> menus) {
         menus.keySet().stream()
-                .filter(menu -> Menu.isNotMenu(menu))
+                .filter(menu -> Menu.isNotInMenu(menu))
                 .findAny()
                 .ifPresent(menu -> {
                     throw new IllegalArgumentException(INVALID_ORDER);
@@ -87,5 +87,11 @@ public class InputValidator {
 
     private static boolean isNotOneMoreThan(int menuCount) {
         return menuCount < MENU_COUNT;
+    }
+
+    public static void validOrderDuplicate(Map<String, Integer> menus, String[] menuGroup) {
+        if (menus.size() != menuGroup.length) {
+            throw new IllegalArgumentException(INVALID_ORDER);
+        }
     }
 }
