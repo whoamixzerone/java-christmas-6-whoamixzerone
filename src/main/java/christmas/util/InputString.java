@@ -1,11 +1,12 @@
 package christmas.util;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class InputString {
     public static String[] menuGroupSplit(String input, String delimiter) {
-        return input.split(delimiter);
+        return removeSpace(input.split(delimiter));
     }
 
     public static Map<String, Integer> menuSplit(String[] menuGroup) {
@@ -16,5 +17,11 @@ public class InputString {
             menus.put(food[0], InputNumber.toInt(food[1]));
         }
         return menus;
+    }
+
+    private static String[] removeSpace(String[] menuGroup) {
+        return Arrays.stream(menuGroup)
+                .map(menu -> menu.replaceAll("\\s", ""))
+                .toArray(String[]::new);
     }
 }

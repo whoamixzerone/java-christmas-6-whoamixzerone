@@ -35,6 +35,7 @@ public class InputView {
                 InputValidator.validMenuForm(menuGroup);
 
                 Map<String, Integer> menus = InputString.menuSplit(menuGroup);
+                InputValidator.validMenu(menus);
 
                 return new String[0];
             } catch (IllegalArgumentException e) {

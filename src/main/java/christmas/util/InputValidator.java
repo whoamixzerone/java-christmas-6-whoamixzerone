@@ -1,11 +1,15 @@
 package christmas.util;
 
+import christmas.constants.MenuType;
+
 import java.util.Arrays;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class InputValidator {
     private static final Pattern NUMBER_REGEX = Pattern.compile("^[0-9]+$");
     private static final Pattern MENU_REGEX = Pattern.compile("([ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+)-(\\d+)");
+
     private static final int FROM_DAY = 1;
     private static final int TO_DAY = 31;
     private static final int MENU_COUNT = 1;
@@ -53,5 +57,18 @@ public class InputValidator {
 
     private static boolean isNotMenuForm(String menu) {
         return !MENU_REGEX.matcher(menu).matches();
+    }
+
+    public static void validMenu(Map<String, Integer> menus) {
+        validMenuType(menus);
+    }
+
+    private static void validMenuType(Map<String, Integer> menus) {
+        menus.keySet().stream()
+                .filter(menu -> MenuType.isNotMenuType(menu))
+                .findAny()
+                .ifPresent(menu -> {
+                    throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                });
     }
 }

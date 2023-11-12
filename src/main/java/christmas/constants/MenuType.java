@@ -1,5 +1,7 @@
 package christmas.constants;
 
+import java.util.Arrays;
+
 public enum MenuType {
     MUSHROOM_CREATE_SOUP("양송이수프", 6_000),
     TAPAS("타파스", 5_500),
@@ -20,6 +22,11 @@ public enum MenuType {
     MenuType(String foodName, long amount) {
         this.foodName = foodName;
         this.amount = amount;
+    }
+
+    public static boolean isNotMenuType(String menuType) {
+        return !Arrays.stream(MenuType.values())
+                .anyMatch(menu -> menuType.equals(menu.getFoodName()));
     }
 
     public String getFoodName() {
