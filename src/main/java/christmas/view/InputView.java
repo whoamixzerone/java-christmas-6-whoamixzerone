@@ -31,11 +31,11 @@ public class InputView {
             String input = Console.readLine();
 
             try {
-                String[] menuGroup = InputString.menuGroupSplit(input, ",");
-                InputValidator.validMenuForm(menuGroup);
+                String[] orderGroup = InputString.orderGroupSplit(input, ",");
+                InputValidator.validOrderForm(orderGroup);
 
-                Map<String, Integer> menus = InputString.menuSplit(menuGroup);
-                InputValidator.validMenu(menus);
+                Map<String, Integer> orders = InputString.orderSplit(orderGroup);
+                InputValidator.validOrder(orders);
 
                 return new String[0];
             } catch (IllegalArgumentException e) {

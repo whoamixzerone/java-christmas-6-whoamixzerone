@@ -5,18 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InputString {
-    public static String[] menuGroupSplit(String input, String delimiter) {
+    public static String[] orderGroupSplit(String input, String delimiter) {
         return removeSpace(input.split(delimiter));
     }
 
-    public static Map<String, Integer> menuSplit(String[] menuGroup) {
-        Map<String, Integer> menus = new HashMap<>();
+    public static Map<String, Integer> orderSplit(String[] orderGroup) {
+        Map<String, Integer> orders = new HashMap<>();
 
-        for (String menu : menuGroup) {
-            String[] food = menuGroupSplit(menu, "-");
-            menus.put(food[0], InputNumber.toInt(food[1]));
+        for (String order : orderGroup) {
+            String[] food = orderGroupSplit(order, "-");
+            orders.put(food[0], InputNumber.toInt(food[1]));
         }
-        return menus;
+        return orders;
     }
 
     private static String[] removeSpace(String[] menuGroup) {

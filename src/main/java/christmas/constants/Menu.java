@@ -2,7 +2,7 @@ package christmas.constants;
 
 import java.util.Arrays;
 
-public enum MenuType {
+public enum Menu {
     MUSHROOM_CREATE_SOUP("양송이수프", 6_000),
     TAPAS("타파스", 5_500),
     CAESAR_SALAD("시저샐러드", 8_000),
@@ -16,21 +16,21 @@ public enum MenuType {
     RED_WINE("레드와인", 60_000),
     CHAMPAGNE("샴페인", 25_000);
 
-    private String foodName;
+    private String food;
     private long amount;
 
-    MenuType(String foodName, long amount) {
-        this.foodName = foodName;
+    Menu(String food, long amount) {
+        this.food = food;
         this.amount = amount;
     }
 
-    public static boolean isNotMenuType(String menuType) {
-        return !Arrays.stream(MenuType.values())
-                .anyMatch(menu -> menuType.equals(menu.getFoodName()));
+    public static boolean isNotMenu(String food) {
+        return !Arrays.stream(Menu.values())
+                .anyMatch(menu -> food.equals(menu.getFood()));
     }
 
-    public String getFoodName() {
-        return foodName;
+    public String getFood() {
+        return food;
     }
 
     public long getAmount() {

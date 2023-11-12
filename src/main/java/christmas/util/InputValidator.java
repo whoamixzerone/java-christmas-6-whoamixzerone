@@ -1,6 +1,6 @@
 package christmas.util;
 
-import christmas.constants.MenuType;
+import christmas.constants.Menu;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -49,27 +49,27 @@ public class InputValidator {
         return !NUMBER_REGEX.matcher(input).matches();
     }
 
-    public static void validMenuForm(String[] menus) {
+    public static void validOrderForm(String[] menus) {
         Arrays.stream(menus)
-                .filter(menu -> isNotMenuForm(menu))
+                .filter(menu -> isNotOrderForm(menu))
                 .findAny()
                 .ifPresent(menu -> {
                     throw new IllegalArgumentException(INVALID_ORDER);
                 });
     }
 
-    private static boolean isNotMenuForm(String menu) {
+    private static boolean isNotOrderForm(String menu) {
         return !MENU_REGEX.matcher(menu).matches();
     }
 
-    public static void validMenu(Map<String, Integer> menus) {
-        validMenuType(menus);
+    public static void validOrder(Map<String, Integer> menus) {
+        validMenu(menus);
         validMenuCount(menus);
     }
 
-    private static void validMenuType(Map<String, Integer> menus) {
+    private static void validMenu(Map<String, Integer> menus) {
         menus.keySet().stream()
-                .filter(menu -> MenuType.isNotMenuType(menu))
+                .filter(menu -> Menu.isNotMenu(menu))
                 .findAny()
                 .ifPresent(menu -> {
                     throw new IllegalArgumentException(INVALID_ORDER);
