@@ -15,6 +15,7 @@ public class Restaurant {
     private final Map<Menu, Integer> orders;
     private final ChristmasDiscount christmasDiscount;
     private final WeekdaysDiscount weekdaysDiscount;
+    private final WeekendsDiscount weekendsDiscount;
 
     private LocalDate reservationDate;
 
@@ -22,6 +23,7 @@ public class Restaurant {
         this.orders = new EnumMap<>(orders);
         christmasDiscount = new ChristmasDiscount();
         weekdaysDiscount = new WeekdaysDiscount();
+        weekendsDiscount = new WeekendsDiscount();
     }
 
     public long calculateTotalAmountBeforeDiscount() {
@@ -41,6 +43,7 @@ public class Restaurant {
 
         long christmasDiscount = this.christmasDiscount.calculateDiscountChristmas(this.reservationDate);
         long weekdaysDiscount = this.weekdaysDiscount.calculateDiscountWeekdays(this.reservationDate, sumDessertCount());
+        long weekendsDiscount = this.weekendsDiscount.calculateDiscountWeekends(this.reservationDate, 0);
     }
 
     private int sumDessertCount() {
