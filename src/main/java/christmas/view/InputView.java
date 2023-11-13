@@ -39,13 +39,13 @@ public class InputView {
                 String[] orderGroup = InputString.orderGroupSplit(input, ",");
                 ValidateOrder.form(orderGroup);
 
-                Map<Menu, Integer> orders = convertMenu(InputString.orderSplit(orderGroup));
-                ValidateOrder.eachMenuCount(orders);
-                ValidateOrder.menuTotalCount(orders);
-                ValidateOrder.menuDuplicate(orders, orderGroup);
-                ValidateOrder.onlyBeverage(orders);
+                Map<Menu, Integer> order = convertMenu(InputString.orderSplit(orderGroup));
+                ValidateOrder.eachMenuCount(order);
+                ValidateOrder.menuTotalCount(order);
+                ValidateOrder.menuDuplicate(order, orderGroup);
+                ValidateOrder.onlyBeverage(order);
 
-                return orders;
+                return order;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
