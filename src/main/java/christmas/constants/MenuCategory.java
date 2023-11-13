@@ -24,6 +24,13 @@ public enum MenuCategory {
         return menus.stream().noneMatch(menu -> !beverages.contains(menu));
     }
 
+    public static boolean isDessert(Menu menu) {
+        List<Menu> desserts = MenuCategory.DESSERT.getFoods();
+
+        return desserts.stream()
+                .anyMatch(dessert -> dessert == menu);
+    }
+
     public String getCategory() {
         return category;
     }

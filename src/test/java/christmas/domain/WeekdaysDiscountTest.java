@@ -22,7 +22,7 @@ class WeekdaysDiscountTest {
     @DisplayName("평일(일~목)이 아니면 할인을 못받는다. 0원을 반환")
     @Test
     void isNotWeekdays() {
-        long discount = weekdaysDiscount.calculateDiscountWeekdays(now);
+        long discount = weekdaysDiscount.calculateDiscountWeekdays(now, 0);
 
         assertThat(discount).isEqualTo(0L);
     }
