@@ -14,7 +14,7 @@ class WeekdaysDiscountTest {
     private int reservationDay;
     private Map<Menu, Integer> orders;
     private Restaurant restaurant;
-    private WeekdaysDiscount weekdaysDiscount;
+    private Discount weekdaysDiscount;
 
     @BeforeEach
     void setUp() {
@@ -25,13 +25,13 @@ class WeekdaysDiscountTest {
 
         restaurant = new Restaurant(orders, reservationDay);
 
-        weekdaysDiscount = new WeekdaysDiscount();
+        weekdaysDiscount = new WeekdaysDiscount(restaurant);
     }
 
     @DisplayName("평일(일~목)이 아니면 할인을 못받는다. 0원을 반환")
     @Test
     void isNotWeekdays() {
-        long discount = weekdaysDiscount.calculateDiscountWeekdays(restaurant);
+        long discount = weekdaysDiscount.calculateDiscount(restaurant);
 
         assertThat(discount).isEqualTo(0L);
     }
@@ -42,7 +42,7 @@ class WeekdaysDiscountTest {
         reservationDay = 14;
         restaurant = new Restaurant(orders, reservationDay);
 
-        long discount = weekdaysDiscount.calculateDiscountWeekdays(restaurant);
+        long discount = weekdaysDiscount.calculateDiscount(restaurant);
 
         assertThat(discount).isEqualTo(8092L);
     }

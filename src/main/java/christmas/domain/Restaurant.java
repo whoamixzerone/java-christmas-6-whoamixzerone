@@ -3,30 +3,19 @@ package christmas.domain;
 import christmas.constants.Menu;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 public class Restaurant {
     private static final long DEFAULT_BENEFIT_AMOUNT = 10_000L;
 
     private final Map<Menu, Integer> orders;
+    private final List<Discount> benefits;
     private final LocalDate reservationDate;
-    private final ChristmasDiscount christmasDiscount;
-    private final WeekdaysDiscount weekdaysDiscount;
-    private final WeekendsDiscount weekendsDiscount;
-    private final SpecialDiscount specialDiscount;
-    private final GiveawayEvent giveawayEvent;
 
     public Restaurant(Map<Menu, Integer> orders, int reservationDay) {
         this.orders = new EnumMap<>(orders);
+        benefits = new ArrayList<>();
         this.reservationDate = LocalDate.of(2023, 12, reservationDay);
-
-        christmasDiscount = new ChristmasDiscount();
-        weekdaysDiscount = new WeekdaysDiscount();
-        weekendsDiscount = new WeekendsDiscount();
-        specialDiscount = new SpecialDiscount();
-        giveawayEvent = new GiveawayEvent();
     }
 
     public long calculateTotalAmountBeforeDiscount() {
@@ -41,12 +30,12 @@ public class Restaurant {
         return DEFAULT_BENEFIT_AMOUNT > calculateTotalAmountBeforeDiscount();
     }
 
-    public void checkedBenefits() {
-        long christmasDiscount = this.christmasDiscount.calculateDiscountChristmas(this);
-        long weekdaysDiscount = this.weekdaysDiscount.calculateDiscountWeekdays(this);
-        long weekendsDiscount = this.weekendsDiscount.calculateDiscountWeekends(this);
-        long specialDiscount = this.specialDiscount.calculateDiscount(this);
-        long giveawayEvent = this.giveawayEvent.calculateDiscount(this);
+    public void applyBenefits() {
+        benefits.add(new ChristmasDiscount(this));
+        benefits.add(new WeekdaysDiscount(this));
+        benefits.add(new WeekendsDiscount(this));
+        benefits.add(new SpecialDiscount(this));
+        benefits.add(new GiveawayEvent(this));
     }
 
     public Map<Menu, Integer> getOrders() {

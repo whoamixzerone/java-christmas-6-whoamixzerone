@@ -8,14 +8,13 @@ import org.junit.jupiter.api.Test;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SpecialDiscountTest {
     private int reservationDay;
     private Map<Menu, Integer> orders;
     private Restaurant restaurant;
-    private SpecialDiscount specialDiscount;
+    private Discount specialDiscount;
 
     @BeforeEach
     void setUp() {
@@ -26,7 +25,7 @@ class SpecialDiscountTest {
 
         restaurant = new Restaurant(orders, reservationDay);    // 14일 목요일
 
-        specialDiscount = new SpecialDiscount();
+        specialDiscount = new SpecialDiscount(restaurant);
     }
 
     @DisplayName("일요일이 아니고 크리스마스가 아니면 특별 할인은 못받는다. 0원을 반환")

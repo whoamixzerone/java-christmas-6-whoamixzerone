@@ -3,7 +3,7 @@ package christmas.domain;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class ChristmasDiscount {
+public class ChristmasDiscount extends Discount {
     private static final int PROMOTION_YEAR = 2023;
     private static final int PROMOTION_MONTH = 12;
     private static final LocalDate FORM_DATE = LocalDate.of(PROMOTION_YEAR, PROMOTION_MONTH, 1);
@@ -13,10 +13,12 @@ public class ChristmasDiscount {
     private static final long INCREMENT_DISCOUNT_AMOUNT = 100L;
     private static final long DEFAULT_CHRISTMAS_DISCOUNT_AMOUNT = 1_000L;
 
-    public ChristmasDiscount() {
+    public ChristmasDiscount(Restaurant restaurant) {
+        amount = calculateDiscount(restaurant);
     }
 
-    public long calculateDiscountChristmas(Restaurant restaurant) {
+    @Override
+    public long calculateDiscount(Restaurant restaurant) {
         LocalDate reservationDate = restaurant.getReservationDate();
         if (isPassedChristmas(reservationDate)) {
             return 0L;

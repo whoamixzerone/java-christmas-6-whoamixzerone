@@ -14,7 +14,7 @@ class GiveawayEventTest {
     private int reservationDay;
     private Map<Menu, Integer> orders;
     private Restaurant restaurant;
-    private GiveawayEvent giveawayEvent;
+    private Discount giveawayEvent;
 
     @BeforeEach
     void setUp() {
@@ -28,7 +28,7 @@ class GiveawayEventTest {
 
         restaurant = new Restaurant(orders, reservationDay);    // 14일 목요일
 
-        giveawayEvent = new GiveawayEvent();
+        giveawayEvent = new GiveawayEvent(restaurant);
     }
 
     @DisplayName("총주문 금액이 120,000원 미만이면 증정 이벤트는 못받는다. 0원 반환")

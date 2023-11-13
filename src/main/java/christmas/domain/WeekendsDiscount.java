@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Map;
 
-public class WeekendsDiscount {
+public class WeekendsDiscount extends Discount {
     private enum Weekends {
         FRIDAY(DayOfWeek.FRIDAY),
         SATURDAY(DayOfWeek.SATURDAY);
@@ -26,10 +26,12 @@ public class WeekendsDiscount {
 
     private static final long DEFAULT_DISCOUNT_AMOUNT = 2_023L;
 
-    public WeekendsDiscount() {
+    public WeekendsDiscount(Restaurant restaurant) {
+        amount = calculateDiscount(restaurant);
     }
 
-    public long calculateDiscountWeekends(Restaurant restaurant) {
+    @Override
+    public long calculateDiscount(Restaurant restaurant) {
         if (isNotWeekends(restaurant.getReservationDate())) {
             return 0L;
         }

@@ -16,7 +16,7 @@ class ChristmasDiscountTest {
     private int reservationDay;
     private Map<Menu, Integer> orders;
     private Restaurant restaurant;
-    private ChristmasDiscount christmasDiscount;
+    private Discount christmasDiscount;
 
     @BeforeEach
     void setUp() {
@@ -27,13 +27,13 @@ class ChristmasDiscountTest {
 
         restaurant = new Restaurant(orders, reservationDay);
 
-        christmasDiscount = new ChristmasDiscount();
+        christmasDiscount = new ChristmasDiscount(restaurant);
     }
 
     @DisplayName("현재 날짜가 크리스마스가 지났으면 0원을 반환한다")
     @Test
     void isPassedChristmas() {
-        long discount = christmasDiscount.calculateDiscountChristmas(restaurant);
+        long discount = christmasDiscount.calculateDiscount(restaurant);
 
         assertThat(discount).isEqualTo(0L);
     }
@@ -44,7 +44,7 @@ class ChristmasDiscountTest {
     void isNotPassedChristmas(int day, long expected) {
         restaurant = new Restaurant(orders, day);
 
-        long discount = christmasDiscount.calculateDiscountChristmas(restaurant);
+        long discount = christmasDiscount.calculateDiscount(restaurant);
 
         assertThat(discount).isEqualTo(expected);
     }
