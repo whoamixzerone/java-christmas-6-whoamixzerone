@@ -31,6 +31,13 @@ public enum MenuCategory {
                 .anyMatch(dessert -> dessert == menu);
     }
 
+    public static boolean isMain(Menu menu) {
+        List<Menu> mains = MenuCategory.MAIN.getFoods();
+
+        return mains.stream()
+                .anyMatch(main -> main == menu);
+    }
+
     public String getCategory() {
         return category;
     }

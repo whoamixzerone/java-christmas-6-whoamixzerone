@@ -43,12 +43,19 @@ public class Restaurant {
 
         long christmasDiscount = this.christmasDiscount.calculateDiscountChristmas(this.reservationDate);
         long weekdaysDiscount = this.weekdaysDiscount.calculateDiscountWeekdays(this.reservationDate, sumDessertCount());
-        long weekendsDiscount = this.weekendsDiscount.calculateDiscountWeekends(this.reservationDate, 0);
+        long weekendsDiscount = this.weekendsDiscount.calculateDiscountWeekends(this.reservationDate, sumMainMenuCount());
     }
 
     private int sumDessertCount() {
         return orders.entrySet().stream()
                 .filter(order -> MenuCategory.isDessert(order.getKey()))
+                .mapToInt(order -> order.getValue())
+                .sum();
+    }
+
+    private int sumMainMenuCount() {
+        return orders.entrySet().stream()
+                .filter(order -> MenuCategory.isMain(order.getKey()))
                 .mapToInt(order -> order.getValue())
                 .sum();
     }
