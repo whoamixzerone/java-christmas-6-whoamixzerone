@@ -31,4 +31,9 @@ public class ChristmasDiscount extends Discount {
     private boolean isPassedChristmas(LocalDate reservationDate) {
         return !reservationDate.isBefore(FORM_DATE) && reservationDate.isAfter(CHRISTMAS_DATE);
     }
+
+    @Override
+    public String toString() {
+        return String.format("크리스마스 디데이 할인: -%,d원", amount);
+    }
 }

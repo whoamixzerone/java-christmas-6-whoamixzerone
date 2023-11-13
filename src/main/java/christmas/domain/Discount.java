@@ -3,5 +3,14 @@ package christmas.domain;
 public abstract class Discount {
     protected long amount;
 
-    public abstract long calculateDiscount(Restaurant restaurant);
+    protected abstract long calculateDiscount(Restaurant restaurant);
+
+    public long getAmount() {
+        return amount;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

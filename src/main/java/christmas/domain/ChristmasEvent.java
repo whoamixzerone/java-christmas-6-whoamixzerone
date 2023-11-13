@@ -25,19 +25,8 @@ public class ChristmasEvent {
         outputView.showOrderMenu(restaurant);
         outputView.showTotalAmountBeforeDiscount(restaurant);
 
-        boolean isBenefits = checkedBenefits(restaurant);
-        if (!isBenefits) {
-            outputView.showNotBenefits(restaurant.calculateTotalAmountBeforeDiscount());
-        }
-    }
+        restaurant.applyBenefits();
 
-    private boolean checkedBenefits(Restaurant restaurant) {
-        if (restaurant.isNotBenefits()) {
-            return false;
-        }
-
-        restaurant.checkedBenefits();
-
-        return true;
+        outputView.showBenefits(restaurant);
     }
 }

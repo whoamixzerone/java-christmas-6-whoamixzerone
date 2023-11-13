@@ -42,6 +42,10 @@ public class Restaurant {
         return orders;
     }
 
+    public List<Discount> getBenefits() {
+        return benefits;
+    }
+
     public LocalDate getReservationDate() {
         return reservationDate;
     }

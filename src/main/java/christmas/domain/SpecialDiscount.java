@@ -33,4 +33,9 @@ public class SpecialDiscount extends Discount {
     private boolean isChristmasDay(LocalDate reservationDate) {
         return reservationDate.compareTo(STAR_CHRISTMAS_DAY) == 0;
     }
+
+    @Override
+    public String toString() {
+        return String.format("특별 할인: -%,d원", amount);
+    }
 }

@@ -20,4 +20,9 @@ public class GiveawayEvent extends Discount {
     private boolean isGiveawayAmountLessThan(long amount) {
         return amount < GIVEAWAY_AMOUNT;
     }
+
+    @Override
+    public String toString() {
+        return String.format("증정 이벤트: -%,d원", amount);
+    }
 }

@@ -53,4 +53,9 @@ public class WeekdaysDiscount extends Discount {
         return Arrays.stream(Weekdays.values())
                 .noneMatch(weekday -> weekday.getWeekday() == reservationDay.getDayOfWeek());
     }
+
+    @Override
+    public String toString() {
+        return String.format("평일 할인: -%,d원", amount);
+    }
 }
