@@ -26,10 +26,6 @@ public class Restaurant {
                 .sum();
     }
 
-    public boolean isNotBenefits() {
-        return DEFAULT_BENEFIT_AMOUNT > calculateTotalAmountBeforeDiscount();
-    }
-
     public void applyBenefits() {
         benefits.add(new ChristmasDiscount(this));
         benefits.add(new WeekdaysDiscount(this));

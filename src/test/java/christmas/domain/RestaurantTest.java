@@ -32,26 +32,4 @@ class RestaurantTest {
 
         assertThat(result).isEqualTo(9_000L);
     }
-
-    @DisplayName("할인 혜택이 적용되지 않으면 true를 반환한다")
-    @Test
-    void isNotBenefits() {
-        boolean isNotBenefits = restaurant.isNotBenefits();
-
-        assertThat(isNotBenefits).isTrue();
-    }
-
-    @DisplayName("할인 혜택이 적용되면 false를 반환한다")
-    @Test
-    void isBenefits() {
-        orders.put(Menu.MUSHROOM_CREATE_SOUP, 1);
-        orders.put(Menu.COKE_ZERO, 1);
-        orders.put(Menu.BBQ_RIBS, 1);
-
-        restaurant = new Restaurant(orders, reservationDay);
-
-        boolean isBenefits = restaurant.isNotBenefits();
-
-        assertThat(isBenefits).isFalse();
-    }
 }
