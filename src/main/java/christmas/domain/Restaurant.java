@@ -1,7 +1,6 @@
 package christmas.domain;
 
 import christmas.constants.Menu;
-import christmas.constants.MenuCategory;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -10,7 +9,6 @@ import java.util.Map;
 
 public class Restaurant {
     private static final long DEFAULT_BENEFIT_AMOUNT = 10_000L;
-    private static final long GIVEAWAY_AMOUNT = 120_000L;
 
     private final Map<Menu, Integer> orders;
     private final LocalDate reservationDate;
@@ -18,6 +16,7 @@ public class Restaurant {
     private final WeekdaysDiscount weekdaysDiscount;
     private final WeekendsDiscount weekendsDiscount;
     private final SpecialDiscount specialDiscount;
+    private final GiveawayEvent giveawayEvent;
 
     public Restaurant(Map<Menu, Integer> orders, int reservationDay) {
         this.orders = new EnumMap<>(orders);
@@ -27,6 +26,7 @@ public class Restaurant {
         weekdaysDiscount = new WeekdaysDiscount();
         weekendsDiscount = new WeekendsDiscount();
         specialDiscount = new SpecialDiscount();
+        giveawayEvent = new GiveawayEvent();
     }
 
     public long calculateTotalAmountBeforeDiscount() {
@@ -46,6 +46,7 @@ public class Restaurant {
         long weekdaysDiscount = this.weekdaysDiscount.calculateDiscountWeekdays(this);
         long weekendsDiscount = this.weekendsDiscount.calculateDiscountWeekends(this);
         long specialDiscount = this.specialDiscount.calculateDiscount(this);
+        long giveawayEvent = this.giveawayEvent.calculateDiscount(this);
     }
 
     public Map<Menu, Integer> getOrders() {
