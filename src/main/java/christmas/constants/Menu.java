@@ -25,7 +25,7 @@ public enum Menu {
         this.amount = amount;
     }
 
-    public static Menu findByFood(String order) {
+    public static Menu findByMenu(String order) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> order.equals(menu.getFood()))
                 .findAny()

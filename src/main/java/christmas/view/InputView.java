@@ -65,6 +65,6 @@ public class InputView {
     }
 
     private static Menu orderToMenu(String order) {
-        return Menu.findByFood(order);
+        return Menu.findByMenu(order);
     }
 }
