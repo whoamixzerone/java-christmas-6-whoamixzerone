@@ -1,8 +1,12 @@
 package christmas.domain;
 
+import christmas.constants.Menu;
+import christmas.constants.MenuCategory;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Map;
 
 public class WeekdaysDiscount {
     private enum Weekdays {
@@ -28,12 +32,19 @@ public class WeekdaysDiscount {
     public WeekdaysDiscount() {
     }
 
-    public long calculateDiscountWeekdays(LocalDate reservationDay, int dessertMenuCount) {
-        if (isNotWeekdays(reservationDay)) {
+    public long calculateDiscountWeekdays(Restaurant restaurant) {
+        if (isNotWeekdays(restaurant.getReservationDate())) {
             return 0L;
         }
 
-        return dessertMenuCount * DEFAULT_DISCOUNT_AMOUNT;
+        return sumDessertMenuCount(restaurant.getOrders()) * DEFAULT_DISCOUNT_AMOUNT;
+    }
+
+    private int sumDessertMenuCount(Map<Menu, Integer> orders) {
+        return orders.entrySet().stream()
+                .filter(order -> MenuCategory.isDessert(order.getKey()))
+                .mapToInt(order -> order.getValue())
+                .sum();
     }
 
     private boolean isNotWeekdays(LocalDate reservationDay) {

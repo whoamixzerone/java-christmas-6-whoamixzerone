@@ -16,7 +16,8 @@ public class ChristmasDiscount {
     public ChristmasDiscount() {
     }
 
-    public long calculateDiscountChristmas(LocalDate reservationDate) {
+    public long calculateDiscountChristmas(Restaurant restaurant) {
+        LocalDate reservationDate = restaurant.getReservationDate();
         if (isPassedChristmas(reservationDate)) {
             return 0L;
         }
