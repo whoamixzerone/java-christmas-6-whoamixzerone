@@ -52,14 +52,20 @@ public class OutputView {
 
     private void showGiveaway(List<Discount> benefits) {
         StringBuilder giveaway = new StringBuilder();
-        giveaway.append("<증정 메뉴>\n");
-        giveaway.append("샴페인 1개");
+        giveaway.append("<증정 메뉴>\n").append("샴페인 1개");
 
         benefits.stream()
-                .filter(benefit -> benefit instanceof GiveawayEvent && benefit.getAmount() == 0L)
-                .map(benefit -> giveaway.insert(1, "없음"));
+                .filter(benefit -> isGiveawayAndZeroAmount(benefit))
+                .forEach(benefit -> {
+                    giveaway.setLength(0);
+                    giveaway.append("<증정 메뉴>\n").append("없음");
+                });
 
         System.out.println(giveaway.toString());
         System.out.println();
+    }
+
+    private boolean isGiveawayAndZeroAmount(Discount benefit) {
+        return benefit instanceof GiveawayEvent && benefit.getAmount() == 0L;
     }
 }
