@@ -17,7 +17,15 @@ public class ChristmasDiscount {
     }
 
     public long calculateDiscountChristmas(LocalDate reservationDate) {
+        if (isPassedChristmas(reservationDate)) {
+            return 0L;
+        }
+
         Period periodDate = Period.between(FORM_DATE, reservationDate);
         return periodDate.getDays() * INCREMENT_DISCOUNT_AMOUNT + DEFAULT_CHRISTMAS_DISCOUNT_AMOUNT;
+    }
+
+    private boolean isPassedChristmas(LocalDate reservationDate) {
+        return !reservationDate.isBefore(FORM_DATE) && reservationDate.isAfter(CHRISTMAS_DATE);
     }
 }
