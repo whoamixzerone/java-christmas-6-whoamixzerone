@@ -23,15 +23,17 @@ public class WeekdaysDiscount {
         }
     }
 
+    private static final long DEFAULT_DISCOUNT_AMOUNT = 2_023L;
+
     public WeekdaysDiscount() {
     }
 
-    public long calculateDiscountWeekdays(LocalDate reservationDay) {
+    public long calculateDiscountWeekdays(LocalDate reservationDay, int dessertCount) {
         if (isNotWeekdays(reservationDay)) {
             return 0L;
         }
 
-        return 1L;
+        return dessertCount * DEFAULT_DISCOUNT_AMOUNT;
     }
 
     private boolean isNotWeekdays(LocalDate reservationDay) {
