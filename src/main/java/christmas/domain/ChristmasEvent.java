@@ -20,23 +20,23 @@ public class ChristmasEvent {
         int reservationDay = inputView.readDate();
         Map<Menu, Integer> order = inputView.readOrder();
 
-        Restaurant restaurant = new Restaurant(order);
+        Restaurant restaurant = new Restaurant(order, reservationDay);
 
-        outputView.showOrderMenu(restaurant, reservationDay);
+        outputView.showOrderMenu(restaurant);
         outputView.showTotalAmountBeforeDiscount(restaurant);
 
-        boolean isBenefits = checkedBenefits(restaurant, reservationDay);
+        boolean isBenefits = checkedBenefits(restaurant);
         if (!isBenefits) {
             outputView.showNotBenefits(restaurant.calculateTotalAmountBeforeDiscount());
         }
     }
 
-    private boolean checkedBenefits(Restaurant restaurant, int reservationDay) {
+    private boolean checkedBenefits(Restaurant restaurant) {
         if (restaurant.isNotBenefits()) {
             return false;
         }
 
-        restaurant.checkedBenefits(reservationDay);
+        restaurant.checkedBenefits();
 
         return true;
     }

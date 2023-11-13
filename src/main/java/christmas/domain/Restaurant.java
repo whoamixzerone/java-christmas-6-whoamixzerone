@@ -19,8 +19,10 @@ public class Restaurant {
 
     private LocalDate reservationDate;
 
-    public Restaurant(Map<Menu, Integer> orders) {
+    public Restaurant(Map<Menu, Integer> orders, int reservationDay) {
         this.orders = new EnumMap<>(orders);
+        this.reservationDate = LocalDate.of(2023, 12, reservationDay);
+
         christmasDiscount = new ChristmasDiscount();
         weekdaysDiscount = new WeekdaysDiscount();
         weekendsDiscount = new WeekendsDiscount();
@@ -38,9 +40,7 @@ public class Restaurant {
         return DEFAULT_BENEFIT_AMOUNT > calculateTotalAmountBeforeDiscount();
     }
 
-    public void checkedBenefits(int reservationDay) {
-        this.reservationDate = LocalDate.of(2023, 12, reservationDay);
-
+    public void checkedBenefits() {
         long christmasDiscount = this.christmasDiscount.calculateDiscountChristmas(this.reservationDate);
         long weekdaysDiscount = this.weekdaysDiscount.calculateDiscountWeekdays(this.reservationDate, sumDessertMenuCount());
         long weekendsDiscount = this.weekendsDiscount.calculateDiscountWeekends(this.reservationDate, sumMainMenuCount());
@@ -62,6 +62,10 @@ public class Restaurant {
 
     public Map<Menu, Integer> getOrders() {
         return orders;
+    }
+
+    public LocalDate getReservationDate() {
+        return reservationDate;
     }
 
     @Override
