@@ -7,6 +7,7 @@ import christmas.util.InputString;
 import christmas.validate.ValidateDay;
 import christmas.validate.ValidateOrder;
 
+import java.util.EnumMap;
 import java.util.Map;
 
 public class InputView {
@@ -38,7 +39,7 @@ public class InputView {
                 String[] orderGroup = InputString.orderGroupSplit(input, ",");
                 ValidateOrder.form(orderGroup);
 
-                Map<Menu, Integer> orders = InputString.orderSplit(orderGroup);
+                Map<Menu, Integer> orders = convertMenu(InputString.orderSplit(orderGroup));
                 ValidateOrder.eachMenuCount(orders);
                 ValidateOrder.menuTotalCount(orders);
                 ValidateOrder.menuDuplicate(orders, orderGroup);
@@ -49,5 +50,21 @@ public class InputView {
                 System.out.println(e.getMessage());
             }
         } while (true);
+    }
+
+    private static Map<Menu, Integer> convertMenu(Map<String, Integer> orders) {
+        Map<Menu, Integer> menus = new EnumMap<>(Menu.class);
+
+        for (Map.Entry<String, Integer> order : orders.entrySet()) {
+            Menu menu = orderToMenu(order.getKey());
+            ValidateOrder.isNonExistentMenu(menu);
+
+            menus.put(menu, order.getValue());
+        }
+        return menus;
+    }
+
+    private static Menu orderToMenu(String order) {
+        return Menu.findByFood(order);
     }
 }
