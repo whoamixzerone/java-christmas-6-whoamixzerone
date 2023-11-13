@@ -32,7 +32,7 @@ class ChristmasDiscountTest {
     @DisplayName("크리스마스 디데이 할인을 받는다")
     @ParameterizedTest
     @CsvSource({"2023,12,1,1000", "2023,12,2,1100", "2023,12,25,3400"})
-    void isNotPassedChristmas(int year, int month, int day, int expected) {
+    void isNotPassedChristmas(int year, int month, int day, long expected) {
         now = LocalDate.of(year, month, day);
 
         long discount = christmasDiscount.calculateDiscountChristmas(now);

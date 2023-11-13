@@ -29,8 +29,8 @@ public class Restaurant {
                 .sum();
     }
 
-    public boolean isBenefits() {
-        return calculateTotalAmountBeforeDiscount() < DEFAULT_BENEFIT_AMOUNT;
+    public boolean isNotBenefits() {
+        return DEFAULT_BENEFIT_AMOUNT > calculateTotalAmountBeforeDiscount();
     }
 
     public void checkedBenefits(int reservationDay) {
