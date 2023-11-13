@@ -42,11 +42,11 @@ public class Restaurant {
         this.reservationDate = LocalDate.of(2023, 12, reservationDay);
 
         long christmasDiscount = this.christmasDiscount.calculateDiscountChristmas(this.reservationDate);
-        long weekdaysDiscount = this.weekdaysDiscount.calculateDiscountWeekdays(this.reservationDate, sumDessertCount());
+        long weekdaysDiscount = this.weekdaysDiscount.calculateDiscountWeekdays(this.reservationDate, sumDessertMenuCount());
         long weekendsDiscount = this.weekendsDiscount.calculateDiscountWeekends(this.reservationDate, sumMainMenuCount());
     }
 
-    private int sumDessertCount() {
+    private int sumDessertMenuCount() {
         return orders.entrySet().stream()
                 .filter(order -> MenuCategory.isDessert(order.getKey()))
                 .mapToInt(order -> order.getValue())

@@ -28,12 +28,12 @@ public class WeekdaysDiscount {
     public WeekdaysDiscount() {
     }
 
-    public long calculateDiscountWeekdays(LocalDate reservationDay, int dessertCount) {
+    public long calculateDiscountWeekdays(LocalDate reservationDay, int dessertMenuCount) {
         if (isNotWeekdays(reservationDay)) {
             return 0L;
         }
 
-        return dessertCount * DEFAULT_DISCOUNT_AMOUNT;
+        return dessertMenuCount * DEFAULT_DISCOUNT_AMOUNT;
     }
 
     private boolean isNotWeekdays(LocalDate reservationDay) {
