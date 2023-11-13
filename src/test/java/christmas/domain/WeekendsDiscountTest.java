@@ -3,6 +3,8 @@ package christmas.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDate;
 
@@ -25,5 +27,15 @@ class WeekendsDiscountTest {
         long discount = weekendsDiscount.calculateDiscountWeekends(now, 5);
 
         assertThat(discount).isEqualTo(0L);
+    }
+
+    @DisplayName("메인 메뉴당 할인을 받는다.")
+    @ParameterizedTest
+    @ValueSource(ints = {5, 2, 1, 4})
+    void isWeekdays(int count) {
+        now = LocalDate.of(2023, 12, 2);   // 토요일
+        long discount = weekendsDiscount.calculateDiscountWeekends(now, count);
+
+        assertThat(discount).isEqualTo(2023L * count);
     }
 }

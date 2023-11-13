@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class WeekendsDiscount {
     private enum Weekends {
         FRIDAY(DayOfWeek.FRIDAY),
-        SUNDAY(DayOfWeek.SUNDAY);
+        SATURDAY(DayOfWeek.SATURDAY);
 
         private final DayOfWeek weekend;
 
@@ -25,12 +25,12 @@ public class WeekendsDiscount {
     public WeekendsDiscount() {
     }
 
-    public long calculateDiscountWeekends(LocalDate reservationDay, int mainCount) {
+    public long calculateDiscountWeekends(LocalDate reservationDay, int mainMenuCount) {
         if (isNotWeekends(reservationDay)) {
             return 0L;
         }
 
-        return 1L;
+        return mainMenuCount * DEFAULT_DISCOUNT_AMOUNT;
     }
 
     private boolean isNotWeekends(LocalDate reservationDay) {
