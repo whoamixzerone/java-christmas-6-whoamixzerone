@@ -1,6 +1,6 @@
 package christmas.constants;
 
-import java.util.Arrays;
+import java.util.*;
 
 public enum Menu {
     MUSHROOM_CREATE_SOUP("양송이수프", 6_000),
@@ -14,7 +14,8 @@ public enum Menu {
     ICE_CREAM("아이스크림", 5_000),
     COKE_ZERO("제로콜라", 3_000),
     RED_WINE("레드와인", 60_000),
-    CHAMPAGNE("샴페인", 25_000);
+    CHAMPAGNE("샴페인", 25_000),
+    EMPTY("없음", 0);
 
     private String food;
     private long amount;
@@ -24,9 +25,11 @@ public enum Menu {
         this.amount = amount;
     }
 
-    public static boolean isNotInMenu(String food) {
-        return !Arrays.stream(Menu.values())
-                .anyMatch(menu -> food.equals(menu.getFood()));
+    public static Menu findByFood(String order) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> order.equals(menu.getFood()))
+                .findAny()
+                .orElse(EMPTY);
     }
 
     public String getFood() {

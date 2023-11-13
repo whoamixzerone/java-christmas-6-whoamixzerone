@@ -1,9 +1,11 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.constants.Menu;
 import christmas.util.InputNumber;
 import christmas.util.InputString;
-import christmas.util.InputValidator;
+import christmas.validate.ValidateDay;
+import christmas.validate.ValidateOrder;
 
 import java.util.Map;
 
@@ -16,7 +18,9 @@ public class InputView {
             String input = Console.readLine();
 
             try {
-                InputValidator.validNumber(input);
+                ValidateDay.blank(input);
+                ValidateDay.numeric(input);
+                ValidateDay.range(input);
 
                 return InputNumber.toInt(input);
             } catch (IllegalArgumentException e) {
@@ -25,20 +29,22 @@ public class InputView {
         } while (true);
     }
 
-    public String[] readOrder() {
+    public Map<Menu, Integer> readOrder() {
         do {
             System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
             String input = Console.readLine();
 
             try {
                 String[] orderGroup = InputString.orderGroupSplit(input, ",");
-                InputValidator.validOrderForm(orderGroup);
+                ValidateOrder.form(orderGroup);
 
-                Map<String, Integer> orders = InputString.orderSplit(orderGroup);
-                InputValidator.validOrder(orders);
-                InputValidator.validOrderDuplicate(orders, orderGroup);
+                Map<Menu, Integer> orders = InputString.orderSplit(orderGroup);
+                ValidateOrder.eachMenuCount(orders);
+                ValidateOrder.menuTotalCount(orders);
+                ValidateOrder.menuDuplicate(orders, orderGroup);
+                ValidateOrder.onlyBeverage(orders);
 
-                return new String[0];
+                return orders;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

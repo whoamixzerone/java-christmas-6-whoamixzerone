@@ -2,6 +2,7 @@ package christmas.constants;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public enum MenuCategory {
     APPETIZER("에피타이저", Arrays.asList(Menu.MUSHROOM_CREATE_SOUP, Menu.TAPAS, Menu.CAESAR_SALAD)),
@@ -17,7 +18,17 @@ public enum MenuCategory {
         this.foods = foods;
     }
 
+    public static boolean isOnlyBeverage(Set<Menu> menus) {
+        List<Menu> beverages = MenuCategory.BEVERAGE.getFoods();
+
+        return menus.stream().noneMatch(menu -> !beverages.contains(menu));
+    }
+
     public String getCategory() {
         return category;
+    }
+
+    public List<Menu> getFoods() {
+        return foods;
     }
 }
