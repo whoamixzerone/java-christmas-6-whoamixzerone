@@ -1,16 +1,19 @@
 package christmas.domain;
 
+import christmas.constants.Menu;
 import christmas.view.InputView;
 
-public class Promotion {
+import java.util.Map;
+
+public class ChristmasEvent {
     private final InputView inputView;
 
-    public Promotion() {
+    public ChristmasEvent() {
         inputView = new InputView();
     }
 
     public void execute() {
         int reservationDay = inputView.readDate();
-        String[] menus = inputView.readOrder();
+        Map<Menu, Integer> menus = inputView.readOrder();
     }
 }

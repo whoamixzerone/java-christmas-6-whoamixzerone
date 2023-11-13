@@ -1,10 +1,10 @@
 package christmas;
 
-import christmas.domain.Promotion;
+import christmas.domain.ChristmasEvent;
 
 public class Application {
     public static void main(String[] args) {
-        Promotion promotion = new Promotion();
-        promotion.execute();
+        ChristmasEvent christmasEvent = new ChristmasEvent();
+        christmasEvent.execute();
     }
 }
