@@ -31,15 +31,23 @@ public class OutputView {
     public void showBenefits(Restaurant restaurant) {
         List<Discount> benefits = restaurant.getBenefits();
         long totalAmountBenefit = restaurant.calculateTotalAmountBenefit();
+        long payAmount = restaurant.calculateTotalAmountAfterDiscount();
 
         showGiveaway(benefits);
         showBenefitDetails(benefits, totalAmountBenefit);
         showTotalAmountBenefit(totalAmountBenefit);
+        showTotalAMountDiscount(payAmount);
+    }
+
+    private void showTotalAMountDiscount(long payAmount) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.printf("%,d원%n", payAmount);
     }
 
     private void showTotalAmountBenefit(long totalAmountBenefit) {
         System.out.println("<총혜택 금액>");
-        System.out.printf("-%,d원%n", totalAmountBenefit);
+        System.out.printf("%,d원%n", -totalAmountBenefit);
+        System.out.println();
     }
 
     private void showBenefitDetails(List<Discount> benefits, long totalAmountBenefit) {
