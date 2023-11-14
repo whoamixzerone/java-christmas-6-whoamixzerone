@@ -23,20 +23,29 @@ public class OutputView {
         System.out.println(String.format(FORMATTER, totalAmount));
 
         if (totalAmount < DEFAULT_EVENT_AMOUNT) {
-            System.out.printf("총주문 금액 %s 이상부터 이벤트가 적용됩니다%n%n", String.format(FORMATTER, DEFAULT_EVENT_AMOUNT));
+            System.out.printf("총주문 금액 %s 이상부터 이벤트가 적용됩니다%n", String.format(FORMATTER, DEFAULT_EVENT_AMOUNT));
         }
+        System.out.println();
     }
 
     public void showBenefits(Restaurant restaurant) {
         List<Discount> benefits = restaurant.getBenefits();
+        long totalAmountBenefit = restaurant.calculateTotalAmountBenefit();
+
         showGiveaway(benefits);
-        showBenefitDetails(benefits);
+        showBenefitDetails(benefits, totalAmountBenefit);
+        showTotalAmountBenefit(totalAmountBenefit);
     }
 
-    private void showBenefitDetails(List<Discount> benefits) {
+    private void showTotalAmountBenefit(long totalAmountBenefit) {
+        System.out.println("<총혜택 금액>");
+        System.out.printf("-%,d원%n", totalAmountBenefit);
+    }
+
+    private void showBenefitDetails(List<Discount> benefits, long totalAmountBenefit) {
         System.out.println("<혜택 내역>");
 
-        if (benefits.size() == 0) {
+        if (totalAmountBenefit == 0L) {
             System.out.println("없음");
             System.out.println();
             return;

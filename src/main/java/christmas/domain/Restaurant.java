@@ -27,6 +27,10 @@ public class Restaurant {
     }
 
     public long calculateTotalAmountBenefit() {
+        if (isNotBenefits()) {
+            return 0L;
+        }
+
         return benefits.stream()
                 .mapToLong(benefit -> benefit.getAmount())
                 .sum();
@@ -38,6 +42,10 @@ public class Restaurant {
         benefits.add(new WeekendsDiscount(this));
         benefits.add(new SpecialDiscount(this));
         benefits.add(new GiveawayEvent(this));
+    }
+
+    public boolean isNotBenefits() {
+        return DEFAULT_BENEFIT_AMOUNT > calculateTotalAmountBeforeDiscount();
     }
 
     public Map<Menu, Integer> getOrders() {
