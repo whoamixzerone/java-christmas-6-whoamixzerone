@@ -26,6 +26,17 @@ public class Restaurant {
                 .sum();
     }
 
+    public long calculateTotalAmountAfterDiscount() {
+        long totalAmountBeforeDiscount = calculateTotalAmountBeforeDiscount();
+        long totalAmountBenefit = calculateTotalAmountBenefit();
+
+        if (!GiveawayEvent.isGiveawayAmountLessThan(totalAmountBeforeDiscount)) {
+            totalAmountBeforeDiscount += Menu.CHAMPAGNE.getAmount();
+        }
+
+        return totalAmountBeforeDiscount - totalAmountBenefit;
+    }
+
     public long calculateTotalAmountBenefit() {
         if (isNotBenefits()) {
             return 0L;

@@ -1,8 +1,10 @@
 package christmas.domain;
 
+import christmas.constants.Menu;
+
 public class GiveawayEvent extends Discount {
     private static final long GIVEAWAY_AMOUNT = 120_000L;
-    private static final long GIVEAWAY_CHAMPAGNE_AMOUNT = 25_000L;
+    private static final long GIVEAWAY_CHAMPAGNE_AMOUNT = Menu.CHAMPAGNE.getAmount();
 
     public GiveawayEvent(Restaurant restaurant) {
         amount = calculateDiscount(restaurant);
@@ -17,7 +19,7 @@ public class GiveawayEvent extends Discount {
         return GIVEAWAY_CHAMPAGNE_AMOUNT;
     }
 
-    private boolean isGiveawayAmountLessThan(long amount) {
+    public static boolean isGiveawayAmountLessThan(long amount) {
         return amount < GIVEAWAY_AMOUNT;
     }
 
