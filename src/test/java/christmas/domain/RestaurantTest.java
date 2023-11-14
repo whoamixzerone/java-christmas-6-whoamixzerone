@@ -25,11 +25,29 @@ class RestaurantTest {
         restaurant = new Restaurant(orders, reservationDay);
     }
 
-    @DisplayName("할인 전 총주문 금액을 구한다.")
+    @DisplayName("할인 전 총주문 금액을 구한다")
     @Test
     void calculateTotalAmountBeforeDisCount() {
         long result = restaurant.calculateTotalAmountBeforeDiscount();
 
         assertThat(result).isEqualTo(9_000L);
+    }
+
+    @DisplayName("총혜택 금액을 구한다")
+    @Test
+    void calculateTotalAmountBenefit() {
+        reservationDay = 25;
+        orders = new EnumMap<>(Menu.class);
+        orders.put(Menu.MUSHROOM_CREATE_SOUP, 1);
+        orders.put(Menu.T_BONE_STEAK, 2);
+        orders.put(Menu.CHRISTMAS_PASTA, 1);
+        orders.put(Menu.RED_WINE, 1);
+
+        restaurant = new Restaurant(orders, reservationDay);
+        restaurant.applyBenefits();
+
+        long result = restaurant.calculateTotalAmountBenefit();
+
+        assertThat(result).isEqualTo(29_400L);
     }
 }

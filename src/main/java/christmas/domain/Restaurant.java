@@ -26,6 +26,12 @@ public class Restaurant {
                 .sum();
     }
 
+    public long calculateTotalAmountBenefit() {
+        return benefits.stream()
+                .mapToLong(benefit -> benefit.getAmount())
+                .sum();
+    }
+
     public void applyBenefits() {
         benefits.add(new ChristmasDiscount(this));
         benefits.add(new WeekdaysDiscount(this));
