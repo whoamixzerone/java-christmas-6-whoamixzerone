@@ -10,7 +10,6 @@ public class ChristmasEvent {
     private final InputView inputView;
     private final OutputView outputView;
 
-
     public ChristmasEvent() {
         inputView = new InputView();
         outputView = new OutputView();
@@ -22,8 +21,6 @@ public class ChristmasEvent {
 
         Restaurant restaurant = new Restaurant(order, reservationDay);
 
-        outputView.showOrderMenu(restaurant);
-        outputView.showTotalAmountBeforeDiscount(restaurant);
-        outputView.showBenefits(restaurant);
+        outputView.previewEventBenefits(restaurant);
     }
 }
