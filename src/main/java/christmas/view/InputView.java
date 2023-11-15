@@ -56,15 +56,11 @@ public class InputView {
         Map<Menu, Integer> menus = new EnumMap<>(Menu.class);
 
         for (Map.Entry<String, Integer> order : orders.entrySet()) {
-            Menu menu = orderToMenu(order.getKey());
+            Menu menu = Menu.findByMenu(order.getKey());
             ValidateOrder.isNonExistentMenu(menu);
 
             menus.put(menu, order.getValue());
         }
         return menus;
-    }
-
-    private static Menu orderToMenu(String order) {
-        return Menu.findByMenu(order);
     }
 }

@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.constants.Menu;
 import christmas.constants.MenuCategory;
+import christmas.constants.Promotion;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -33,7 +34,7 @@ public class WeekendsDiscount extends Discount {
     @Override
     public long calculateDiscount(Restaurant restaurant) {
         if (isNotWeekends(restaurant.getReservationDate())) {
-            return 0L;
+            return Promotion.ZERO_AMOUNT;
         }
 
         return sumMainMenuCount(restaurant.getOrders()) * DEFAULT_DISCOUNT_AMOUNT;

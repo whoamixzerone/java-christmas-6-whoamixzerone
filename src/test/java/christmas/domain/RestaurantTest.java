@@ -44,7 +44,6 @@ class RestaurantTest {
         orders.put(Menu.RED_WINE, 1);
 
         restaurant = new Restaurant(orders, reservationDay);
-        restaurant.applyBenefits();
 
         long result = restaurant.calculateTotalAmountBenefit();
 
@@ -54,8 +53,6 @@ class RestaurantTest {
     @DisplayName("혜택을 못받으면 총혜택 금액은 0원을 반환한다")
     @Test
     void notTotalAmountBenefit() {
-        restaurant.applyBenefits();
-
         long result = restaurant.calculateTotalAmountBenefit();
 
         assertThat(result).isEqualTo(0L);

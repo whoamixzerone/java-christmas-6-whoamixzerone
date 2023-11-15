@@ -2,7 +2,8 @@ package christmas.validate;
 
 import christmas.constants.Menu;
 import christmas.constants.MenuCategory;
-import christmas.util.InputNumber;
+import christmas.constants.Promotion;
+import christmas.domain.Restaurant;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -14,9 +15,6 @@ public class ValidateOrder {
     private static final String INVALID_ORDER = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String INVALID_ORDER_MENU = "[ERROR] 음료만 주문할 수 없습니다. 다시 입력해 주세요.";
     private static final String INVALID_TOTAL_MENU_COUNT = "[ERROR] 최대 주문 개수는 20개입니다. 다시 입력해 주세요.";
-
-    private static final int DEFAULT_MENU_COUNT = 1;
-    private static final int TOTAL_MENU_COUNT = 20;
 
     public static void form(String[] menus) {
         Arrays.stream(menus)
@@ -43,10 +41,10 @@ public class ValidateOrder {
                 });
     }
     private static boolean isNotOneMoreThan(int menuCount) {
-        return menuCount < DEFAULT_MENU_COUNT;
+        return menuCount < Promotion.DEFAULT_MENU_COUNT;
     }
     public static void menuTotalCount(Map<Menu, Integer> orders) {
-        if (TOTAL_MENU_COUNT < InputNumber.sumMenuCount(orders)) {
+        if (Promotion.TOTAL_MENU_COUNT < Restaurant.sumMenuCount(orders)) {
             throw new IllegalArgumentException(INVALID_TOTAL_MENU_COUNT);
         }
     }

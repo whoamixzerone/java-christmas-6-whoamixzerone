@@ -1,10 +1,12 @@
 package christmas.domain;
 
+import christmas.constants.Promotion;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class SpecialDiscount extends Discount {
-    private static final LocalDate STAR_CHRISTMAS_DAY = LocalDate.of(2023, 12, 25);
+    private static final LocalDate STAR_CHRISTMAS_DAY = LocalDate.of(Promotion.YEAR, Promotion.MONTH, 25);
     private static final DayOfWeek STAR_DAY_OF_WEEK = DayOfWeek.SUNDAY;
     private static final long SPECIAL_DISCOUNT_AMOUNT = 1_000L;
 
@@ -15,7 +17,7 @@ public class SpecialDiscount extends Discount {
     @Override
     public long calculateDiscount(Restaurant restaurant) {
         if (isNotStarDay(restaurant.getReservationDate())) {
-            return 0L;
+            return Promotion.ZERO_AMOUNT;
         }
 
         return SPECIAL_DISCOUNT_AMOUNT;

@@ -1,14 +1,12 @@
 package christmas.validate;
 
+import christmas.constants.Promotion;
 import christmas.util.InputNumber;
 
 import java.util.regex.Pattern;
 
 public class ValidateDay {
     private static final Pattern NUMBER_REGEX = Pattern.compile("^[0-9]+$");
-
-    private static final int FROM_DAY = 1;
-    private static final int TO_DAY = 31;
 
     private static final String INVALID_DAY = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
 
@@ -35,6 +33,6 @@ public class ValidateDay {
     }
 
     private static boolean isNotBetweenFromOrTo(int day) {
-        return day < FROM_DAY || day > TO_DAY;
+        return day < Promotion.FROM_DAY || day > Promotion.TO_DAY;
     }
 }

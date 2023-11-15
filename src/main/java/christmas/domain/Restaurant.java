@@ -2,20 +2,19 @@ package christmas.domain;
 
 import christmas.constants.Badge;
 import christmas.constants.Menu;
+import christmas.constants.Promotion;
 
 import java.time.LocalDate;
 import java.util.*;
 
 public class Restaurant {
-    private static final long DEFAULT_BENEFIT_AMOUNT = 10_000L;
-
     private final Map<Menu, Integer> orders;
     private final List<Discount> benefits;
     private final LocalDate reservationDate;
 
     public Restaurant(Map<Menu, Integer> orders, int reservationDay) {
         this.orders = new EnumMap<>(orders);
-        this.reservationDate = LocalDate.of(2023, 12, reservationDay);
+        this.reservationDate = LocalDate.of(Promotion.YEAR, Promotion.MONTH, reservationDay);
         benefits = new ArrayList<>();
 
         benefits.add(new ChristmasDiscount(this));
@@ -23,6 +22,12 @@ public class Restaurant {
         benefits.add(new WeekendsDiscount(this));
         benefits.add(new SpecialDiscount(this));
         benefits.add(new GiveawayEvent(this));
+    }
+
+    public static int sumMenuCount(Map<Menu, Integer> orders) {
+        return orders.entrySet().stream()
+                .mapToInt(order -> order.getValue())
+                .sum();
     }
 
     public long calculateTotalAmountBeforeDiscount() {
@@ -46,7 +51,7 @@ public class Restaurant {
 
     public long calculateTotalAmountBenefit() {
         if (isNotBenefits()) {
-            return 0L;
+            return Promotion.ZERO_AMOUNT;
         }
 
         return benefits.stream()
@@ -55,7 +60,7 @@ public class Restaurant {
     }
 
     public boolean isNotBenefits() {
-        return DEFAULT_BENEFIT_AMOUNT > calculateTotalAmountBeforeDiscount();
+        return Promotion.DEFAULT_BENEFIT_AMOUNT > calculateTotalAmountBeforeDiscount();
     }
 
     public Badge findBadgeByAmountDiscount() {
