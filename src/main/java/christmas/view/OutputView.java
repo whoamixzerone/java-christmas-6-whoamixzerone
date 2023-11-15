@@ -17,7 +17,8 @@ public class OutputView {
     }
 
     private void previewOrderMenu(Restaurant restaurant) {
-        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!%n%n", restaurant.getReservationDate().getDayOfMonth());
+        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!%n%n",
+                restaurant.getReservationDate().getDayOfMonth());
         System.out.println("<주문 메뉴>");
         System.out.println(restaurant);
     }
@@ -28,7 +29,8 @@ public class OutputView {
         System.out.println("<할인 전 총주문 금액>");
 
         if (totalAmount < Promotion.DEFAULT_BENEFIT_AMOUNT) {
-            System.out.printf("총주문 금액 %s 이상부터 이벤트가 적용됩니다%n", String.format(WON_FORMATTER, Promotion.DEFAULT_BENEFIT_AMOUNT));
+            System.out.printf("총주문 금액 %s 이상부터 이벤트가 적용됩니다%n",
+                    String.format(WON_FORMATTER, Promotion.DEFAULT_BENEFIT_AMOUNT));
         }
 
         System.out.println(String.format(WON_FORMATTER, totalAmount));
@@ -97,6 +99,7 @@ public class OutputView {
     }
 
     private boolean isGiveawayAndZeroAmount(Discount benefit) {
-        return benefit instanceof GiveawayEvent && benefit.getAmount() == Promotion.ZERO_AMOUNT;
+        return benefit instanceof GiveawayEvent
+                && benefit.getAmount() == Promotion.ZERO_AMOUNT;
     }
 }
