@@ -1,6 +1,7 @@
 package christmas.constants;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public enum Badge {
     STAR("별", 5_000L),
@@ -18,10 +19,14 @@ public enum Badge {
 
     public static Badge findByAmount(long amount) {
         return Arrays.stream(Badge.values())
-                .sorted((badge1, badge2) -> Long.compare(badge2.getAmount(), badge1.getAmount()))
+                .sorted(getBadgeComparatorDescending())
                 .filter(badge -> amount >= badge.getAmount())
                 .findAny()
                 .orElse(EMPTY);
+    }
+
+    private static Comparator<Badge> getBadgeComparatorDescending() {
+        return (badge1, badge2) -> Long.compare(badge2.getAmount(), badge1.getAmount());
     }
 
     public String getTitle() {
