@@ -24,9 +24,6 @@ public class ChristmasEvent {
 
         outputView.showOrderMenu(restaurant);
         outputView.showTotalAmountBeforeDiscount(restaurant);
-
-        restaurant.applyBenefits();
-
         outputView.showBenefits(restaurant);
     }
 }

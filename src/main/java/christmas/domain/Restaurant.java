@@ -15,8 +15,14 @@ public class Restaurant {
 
     public Restaurant(Map<Menu, Integer> orders, int reservationDay) {
         this.orders = new EnumMap<>(orders);
-        benefits = new ArrayList<>();
         this.reservationDate = LocalDate.of(2023, 12, reservationDay);
+        benefits = new ArrayList<>();
+
+        benefits.add(new ChristmasDiscount(this));
+        benefits.add(new WeekdaysDiscount(this));
+        benefits.add(new WeekendsDiscount(this));
+        benefits.add(new SpecialDiscount(this));
+        benefits.add(new GiveawayEvent(this));
     }
 
     public long calculateTotalAmountBeforeDiscount() {
@@ -46,14 +52,6 @@ public class Restaurant {
         return benefits.stream()
                 .mapToLong(benefit -> benefit.getAmount())
                 .sum();
-    }
-
-    public void applyBenefits() {
-        benefits.add(new ChristmasDiscount(this));
-        benefits.add(new WeekdaysDiscount(this));
-        benefits.add(new WeekendsDiscount(this));
-        benefits.add(new SpecialDiscount(this));
-        benefits.add(new GiveawayEvent(this));
     }
 
     public boolean isNotBenefits() {
