@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.constants.Badge;
 import christmas.constants.Menu;
 
 import java.time.LocalDate;
@@ -57,6 +58,10 @@ public class Restaurant {
 
     public boolean isNotBenefits() {
         return DEFAULT_BENEFIT_AMOUNT > calculateTotalAmountBeforeDiscount();
+    }
+
+    public Badge findBadgeByAmountDiscount() {
+        return Badge.findByAmount(calculateTotalAmountBenefit());
     }
 
     public Map<Menu, Integer> getOrders() {

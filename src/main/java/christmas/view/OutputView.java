@@ -7,6 +7,7 @@ import christmas.domain.Restaurant;
 import java.util.List;
 
 public class OutputView {
+    private static final long ZERO_AMOUNT = 0L;
     private static final long DEFAULT_EVENT_AMOUNT = 10_000L;
     private static final String FORMATTER = "%,d원";
 
@@ -20,11 +21,12 @@ public class OutputView {
         long totalAmount = restaurant.calculateTotalAmountBeforeDiscount();
 
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(String.format(FORMATTER, totalAmount));
 
         if (totalAmount < DEFAULT_EVENT_AMOUNT) {
             System.out.printf("총주문 금액 %s 이상부터 이벤트가 적용됩니다%n", String.format(FORMATTER, DEFAULT_EVENT_AMOUNT));
         }
+
+        System.out.println(String.format(FORMATTER, totalAmount));
         System.out.println();
     }
 
@@ -37,11 +39,18 @@ public class OutputView {
         showBenefitDetails(benefits, totalAmountBenefit);
         showTotalAmountBenefit(totalAmountBenefit);
         showTotalAMountDiscount(payAmount);
+        showBadge(restaurant);
+    }
+
+    private void showBadge(Restaurant restaurant) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(restaurant.findBadgeByAmountDiscount().getTitle());
     }
 
     private void showTotalAMountDiscount(long payAmount) {
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.printf("%,d원%n", payAmount);
+        System.out.println();
     }
 
     private void showTotalAmountBenefit(long totalAmountBenefit) {
@@ -53,14 +62,14 @@ public class OutputView {
     private void showBenefitDetails(List<Discount> benefits, long totalAmountBenefit) {
         System.out.println("<혜택 내역>");
 
-        if (totalAmountBenefit == 0L) {
+        if (totalAmountBenefit == ZERO_AMOUNT) {
             System.out.println("없음");
             System.out.println();
             return;
         }
 
         for (Discount benefit : benefits) {
-            if (benefit.getAmount() != 0L) {
+            if (benefit.getAmount() != ZERO_AMOUNT) {
                 System.out.printf("%s%n", benefit);
             }
         }
@@ -83,6 +92,6 @@ public class OutputView {
     }
 
     private boolean isGiveawayAndZeroAmount(Discount benefit) {
-        return benefit instanceof GiveawayEvent && benefit.getAmount() == 0L;
+        return benefit instanceof GiveawayEvent && benefit.getAmount() == ZERO_AMOUNT;
     }
 }
